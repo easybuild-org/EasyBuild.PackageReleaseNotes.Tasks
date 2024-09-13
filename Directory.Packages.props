@@ -5,15 +5,16 @@
   <ItemGroup>
     <PackageVersion Include="BlackFox.CommandLine" Version="1.0.0" />
     <PackageVersion Include="EasyBuild.FileSystemProvider" Version="0.3.0" />
-    <PackageVersion Include="EasyBuild.PackageReleaseNotes.Tasks" Version="0.0.1-test-1726233275" />
     <PackageVersion Include="Faqt" Version="4.2.0" />
-    <PackageVersion Include="Fixie.TestAdapter" Version="3.4.0" />
     <PackageVersion Include="FSharp.Core" Version="7.0.300" />
     <PackageVersion Include="FsToolkit.ErrorHandling" Version="4.16.0" />
     <PackageVersion Include="Ionide.KeepAChangelog.Tasks" Version="1.0.0-test-002" />
     <PackageVersion Include="KeepAChangelogParser" Version="1.2.4" />
     <PackageVersion Include="Microsoft.Build.Utilities.Core" Version="17.11.4" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
     <PackageVersion Include="Moq" Version="4.20.72" />
+    <PackageVersion Include="MSTest.TestAdapter" Version="3.6.0" />
+    <PackageVersion Include="MSTest.TestFramework" Version="3.6.0" />
     <PackageVersion Include="Semver" Version="2.3.0" />
     <PackageVersion Include="SimpleExec" Version="12.0.0" />
   </ItemGroup>

@@ -18,3 +18,13 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 * Bug fix 1
 * Bug fix 2
+
+## 0.9.0
+
+### 🚀 Features
+
+* Feature 1
+
+### 🐞 Bug Fixes
+
+* Bug fix 1

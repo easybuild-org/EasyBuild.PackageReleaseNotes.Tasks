@@ -1,0 +1,34 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net8.0</TargetFramework>
+        <!-- <IsPackable>false</IsPackable> -->
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Compile Include="Workspace.fs" />
+        <Compile Include="Setup.fs" />
+        <Compile Include="UnitTests.fs" />
+        <Compile Include="IntegrationTests.fs" />
+        <Compile Include="LastVersionFinderTests.fs" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="BlackFox.CommandLine" />
+      <PackageReference Include="EasyBuild.FileSystemProvider" />
+      <PackageReference Include="Faqt" />
+      <PackageReference Include="Fixie.TestAdapter" />
+      <PackageReference Include="FSharp.Core" />
+      <PackageReference Include="KeepAChangelogParser" />
+      <PackageReference Include="Microsoft.Build.Utilities.Core" />
+      <PackageReference Include="Moq" />
+      <PackageReference Include="Semver" />
+      <PackageReference Include="SimpleExec" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\src\EasyBuild.PackageReleaseNotes.Tasks.fsproj" />
+    </ItemGroup>
+
+</Project>

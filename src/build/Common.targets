@@ -1,0 +1,32 @@
+<Project>
+
+    <PropertyGroup>
+        <_EasyBuild_PackageReleaseNotes_Tasks Condition=" '$(MSBuildRuntimeType)' != 'Core' ">net472</_EasyBuild_PackageReleaseNotes_Tasks>
+        <_EasyBuild_PackageReleaseNotes_Tasks Condition=" '$(MSBuildRuntimeType)' == 'Core' ">net6.0</_EasyBuild_PackageReleaseNotes_Tasks>
+    </PropertyGroup>
+
+    <UsingTask
+        AssemblyFile="$(MSBuildThisFileDirectory)../tasks/$(_EasyBuild_PackageReleaseNotes_Tasks)/EasyBuild.PackageReleaseNotes.Tasks.dll"
+        TaskName="EasyBuild.PackageReleaseNotes.Tasks.GetCurrentReleaseTask" />
+
+    <Target
+        Name="GetCurrentRelease"
+        Inputs="$(ChangelogFile)"
+        Outputs="CurrentRelease" >
+        <EasyBuild.PackageReleaseNotes.Tasks.GetCurrentReleaseTask ChangelogFile="$(ChangelogFile)">
+            <Output
+                TaskParameter="CurrentRelease"
+                ItemName="CurrentRelease" />
+        </EasyBuild.PackageReleaseNotes.Tasks.GetCurrentReleaseTask>
+    </Target>
+
+    <Target
+        Name="SetVersionFromCurrentRelease"
+        DependsOnTargets="GetCurrentRelease">
+        <PropertyGroup Condition="'@(CurrentRelease)' != ''">
+            <Version>%(CurrentRelease.Version)</Version>
+            <PackageVersion>%(CurrentRelease.Version)</PackageVersion>
+            <PackageReleaseNotes>%(CurrentRelease.Body)</PackageReleaseNotes>
+        </PropertyGroup>
+    </Target>
+</Project>

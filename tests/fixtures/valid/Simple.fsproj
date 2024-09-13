@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+    </PropertyGroup>
+
+   <PropertyGroup>
+        <ChangelogFile>$(MSBuildThisFileDirectory)/../CHANGELOG_ConventionalCommits.md</ChangelogFile>
+   </PropertyGroup>
+
+   <ItemGroup>
+     <PackageReference Include="EasyBuild.PackageReleaseNotes.Tasks" PrivateAssets="all" />
+   </ItemGroup>
+
+</Project>

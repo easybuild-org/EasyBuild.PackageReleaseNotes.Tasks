@@ -1,0 +1,87 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFrameworks>net472;net6.0</TargetFrameworks>
+        <DebugType>embedded</DebugType>
+        <IsPackable>true</IsPackable>
+        <Description>MSBuild Tasks and Targets that set your Package Version, and Package Release
+            Notes based on your Changelog file.</Description>
+
+        <!--
+            We need the assemblies bundled, we don't expose any dependencies to the outside world
+        -->
+        <TargetsForTfmSpecificBuildOutput>
+            $(TargetsForTfmSpecificBuildOutput);CopyProjectReferencesToPackage</TargetsForTfmSpecificBuildOutput>
+        <NoWarn>NU5128;NU5100</NoWarn><!-- NU5100 is because we pack to tasks/, not lib/ -->
+        <BuildOutputTargetFolder>tasks</BuildOutputTargetFolder>
+
+        <!-- deps.json generation -->
+        <GenerateDependencyFile>true</GenerateDependencyFile>
+        <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Compile Include="LastVersionFinder.fs" />
+        <Compile Include="Log.fs" />
+        <Compile Include="GetCurrentReleaseTask.fs" />
+
+        <!--
+            These lines pack the single-TFM build props/targets files to the `build` folder in the generated package.
+
+            By convention, the .NET SDK will look for `build\<Package Id>.props` and `build\<PackageId>.targets`
+            for automatic inclusion in a single-TFM build.
+        -->
+        <Content Pack="true" Include="build\*" PackagePath="build\" />
+
+        <!--
+            These lines pack the multi-target TFM build props/targets files to the
+            `buildMultiTargeting` folder in the generated package.
+
+            By convention, the .NET SDK will look for `buildMultiTargeting\<Package Id>.props`
+            and `buildMultiTargeting\<Package Id>.targets` for automatic inclusion in a multi-TFM build.
+        -->
+        <Content Pack="true" Include="buildMultiTargeting\*" PackagePath="buildMultiTargeting\" />
+    </ItemGroup>
+
+    <!-- All dependencies need PrivateAssets="all" not flow as a nuget-dependency to consumers -->
+    <ItemGroup>
+        <PackageReference
+            Include="FsToolkit.ErrorHandling"
+            PrivateAssets="all" />
+        <!-- MSBUC specifically-->
+        <PackageReference
+            Include="Microsoft.Build.Utilities.Core"
+            ExcludeAssets="Runtime"
+            PrivateAssets="all" />
+        <PackageReference
+            Include="Semver"
+            PrivateAssets="all" />
+        <PackageReference
+            Include="FSharp.Core"
+            PrivateAssets="all" />
+    </ItemGroup>
+
+    <Target Name="AddBuildDependencyFileToBuiltProjectOutputGroupOutput"
+        BeforeTargets="BuiltProjectOutputGroup" Condition=" '$(GenerateDependencyFile)' == 'true'">
+
+        <ItemGroup>
+            <BuiltProjectOutputGroupOutput
+                Include="$(ProjectDepsFilePath)"
+                TargetPath="$(ProjectDepsFileName)"
+                FinalOutputPath="$(ProjectDepsFilePath)" />
+        </ItemGroup>
+    </Target>
+
+    <Target Name="CopyProjectReferencesToPackage" DependsOnTargets="ResolveReferences">
+        <ItemGroup>
+            <!--
+                The dependencies of your MSBuild task must be packaged inside the package, they
+                cannot be expressed as normal PackageReferences
+            -->
+            <BuildOutputInPackage
+                Include="@(ReferenceCopyLocalPaths)"
+                TargetPath="%(ReferenceCopyLocalPaths.DestinationSubPath)" />
+        </ItemGroup>
+    </Target>
+
+</Project>

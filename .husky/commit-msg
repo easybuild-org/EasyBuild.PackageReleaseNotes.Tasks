@@ -18,5 +18,4 @@
 
 ## or put your custom commands -------------------
 #echo 'Husky.Net is awesome!'
-
-dotnet run --project "src/EasyBuild.CommitLinter.fsproj" "$1"
+dotnet commit-linter "$1"

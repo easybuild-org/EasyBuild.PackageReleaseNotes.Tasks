@@ -22,9 +22,7 @@ type TestCommand() =
                 CmdLine.empty
                 |> CmdLine.appendRaw "watch"
                 |> CmdLine.appendRaw "test"
-                |> CmdLine.appendPrefix
-                    "--project"
-                    Workspace.tests.``EasyBuild.CommitLinter.Tests.fsproj``
+                |> CmdLine.appendPrefix "--project" Workspace.tests.``Tests.fsproj``
                 |> CmdLine.toString
             )
         else

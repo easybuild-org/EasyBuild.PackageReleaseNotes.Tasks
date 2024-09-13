@@ -309,7 +309,8 @@ type ReleaseCommand() =
                     "dotnet",
                     CmdLine.empty
                     |> CmdLine.appendRaw "pack"
-                    |> CmdLine.appendRaw Workspace.src.``EasyBuild.CommitLinter.fsproj``
+                    |> CmdLine.appendRaw
+                        Workspace.src.``EasyBuild.PackageReleaseNotes.Tasks.fsproj``
                     |> CmdLine.appendRaw "-c Release"
                     |> CmdLine.appendRaw $"-p:PackageVersion=\"%s{newVersion.ToString()}\""
                     |> CmdLine.appendRaw
@@ -328,10 +329,12 @@ type ReleaseCommand() =
             if not m.Success then
                 failwith $"Failed to find nupkg path in output:\n{standardOutput}"
 
-            Nuget.push (
-                m.Groups.["nupkgPath"].Value,
-                Environment.GetEnvironmentVariable("NUGET_KEY")
-            )
+            let nugetKey = Environment.GetEnvironmentVariable("NUGET_KEY")
+
+            if isNull nugetKey then
+                failwith "NUGET_KEY environment variable is not set"
+
+            Nuget.push (m.Groups.["nupkgPath"].Value, nugetKey)
 
             Command.Run("git", "add .")
 
@@ -344,7 +347,5 @@ type ReleaseCommand() =
             )
 
             Command.Run("git", "push")
-
-            // PublishCommand().Execute(context, PublishSettings(SkipBuild = true)) |> ignore
 
             0

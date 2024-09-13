@@ -7,6 +7,8 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "EasyBuild.PackageReleaseNot
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Tests", "tests\Tests.fsproj", "{DC19E6B5-D514-43EC-AA1D-2DF71F6CBA23}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "EasyBuild", "build\EasyBuild.fsproj", "{E0A685A1-5EB0-40E9-A67C-DEDE67AE68F8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{DC19E6B5-D514-43EC-AA1D-2DF71F6CBA23}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DC19E6B5-D514-43EC-AA1D-2DF71F6CBA23}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DC19E6B5-D514-43EC-AA1D-2DF71F6CBA23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0A685A1-5EB0-40E9-A67C-DEDE67AE68F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0A685A1-5EB0-40E9-A67C-DEDE67AE68F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0A685A1-5EB0-40E9-A67C-DEDE67AE68F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0A685A1-5EB0-40E9-A67C-DEDE67AE68F8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

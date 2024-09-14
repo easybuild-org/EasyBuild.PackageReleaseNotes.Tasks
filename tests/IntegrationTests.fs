@@ -28,7 +28,7 @@ type IntegrationTests() =
 
     member val testPackageVersion = null with get, set
 
-    member this.AddPackageReference (projectName : string) =
+    member this.AddPackageReference(projectName: string) =
         let suffix = projectName.Replace(".fsproj", "")
 
         this.testPackageVersion <- $"0.0.1-test-{suffix}"
@@ -52,21 +52,20 @@ type IntegrationTests() =
             CmdLine.empty
             |> CmdLine.appendPrefix "add" projectName
             |> CmdLine.appendPrefix "package" "EasyBuild.PackageReleaseNotes.Tasks"
-            |> CmdLine.appendPrefix "--source" VirtualWorkspace.packages.``.``
+            // |> CmdLine.appendPrefix "--source" VirtualWorkspace.packages.``.``
             |> CmdLine.appendPrefix "--version" this.testPackageVersion
             |> CmdLine.toString,
             workingDirectory = Workspace.fixtures.``.``
         )
 
     [<TestMethod>]
-    member this.``works for absolute path with conventional commits changelog`` () : Task =
+    member this.``works for absolute path with conventional commits changelog``() : Task =
         task {
             let projectName = "WorksForAbsolutePathWithConventionalCommitsChangelog.fsproj"
 
             this.AddPackageReference projectName
 
-            let! struct (stdout, _) =
-                Utils.getPackageProperties projectName
+            let! struct (stdout, _) = Utils.getPackageProperties projectName
 
             stdout
                 .Should()
@@ -84,14 +83,13 @@ type IntegrationTests() =
         }
 
     [<TestMethod>]
-    member this.``works for relative path with conventional commits changelog`` () : Task =
+    member this.``works for relative path with conventional commits changelog``() : Task =
         task {
             let projectName = "WorksForRelativePathWithConventionalCommitsChangelog.fsproj"
 
             this.AddPackageReference projectName
 
-            let! struct (stdout, _) =
-                Utils.getPackageProperties projectName
+            let! struct (stdout, _) = Utils.getPackageProperties projectName
 
             stdout
                 .Should()
@@ -108,16 +106,14 @@ type IntegrationTests() =
             |> ignore
         }
 
-
     [<TestMethod>]
-    member this.``works for absolute path with keep a changelog`` () : Task =
+    member this.``works for absolute path with keep a changelog``() : Task =
         task {
             let projectName = "WorksForAbsolutePathWithKeepAChangelog.fsproj"
 
             this.AddPackageReference projectName
 
-            let! struct (stdout, _) =
-                Utils.getPackageProperties projectName
+            let! struct (stdout, _) = Utils.getPackageProperties projectName
 
             stdout
                 .Should()
@@ -135,14 +131,13 @@ type IntegrationTests() =
         }
 
     [<TestMethod>]
-    member this.``works for relative path with keep a changelog`` () : Task =
+    member this.``works for relative path with keep a changelog``() : Task =
         task {
             let projectName = "WorksForRelativePathWithKeepAChangelog.fsproj"
 
             this.AddPackageReference projectName
 
-            let! struct (stdout, _) =
-                Utils.getPackageProperties projectName
+            let! struct (stdout, _) = Utils.getPackageProperties projectName
 
             stdout
                 .Should()
@@ -159,16 +154,14 @@ type IntegrationTests() =
             |> ignore
         }
 
-
     [<TestMethod>]
-    member this.``works with default CHANGELOG.md if no changelog is specified`` () : Task =
+    member this.``works with default CHANGELOG.md if no changelog is specified``() : Task =
         task {
             let projectName = "DefaultToChangelogIfNotSpecified.fsproj"
 
             this.AddPackageReference projectName
 
-            let! struct (stdout, _) =
-                Utils.getPackageProperties projectName
+            let! struct (stdout, _) = Utils.getPackageProperties projectName
 
             stdout
                 .Should()

@@ -4,8 +4,10 @@ open EasyBuild.FileSystemProvider
 
 type Workspace = RelativeFileSystem<".">
 
-type VirtualWorkspace = VirtualFileSystem<".",
-"""
+type VirtualWorkspace =
+    VirtualFileSystem<
+        ".",
+        """
 packages/
 """
->
+     >

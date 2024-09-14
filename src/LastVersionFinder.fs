@@ -44,10 +44,10 @@ module LastVersionFinder =
 
     type Errors =
         | NoVersionFound
-        | InvalidVersionFormat of line : string
+        | InvalidVersionFormat of line: string
         | InvalidDate of string
 
-        member this.ToText () =
+        member this.ToText() =
             match this with
             | NoVersionFound -> "No version found"
             | InvalidVersionFormat version -> $"Invalid version format: %s{version}"
@@ -89,7 +89,6 @@ module LastVersionFinder =
                             |> List.skipWhile (fun line -> line.Trim() = "")
                             |> List.rev
                             |> String.concat "\n"
-
 
                         return
                             {

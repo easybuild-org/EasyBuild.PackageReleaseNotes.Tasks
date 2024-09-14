@@ -25,10 +25,7 @@ let changelogFileNotFound (filePath: string) =
         ErrorCode = "EPT0001"
         HelpKeyword = "Missing Changelog file"
         Message = "The Changelog file {0} was not found."
-        MessageArgs =
-            [|
-                box filePath
-            |]
+        MessageArgs = [| box filePath |]
     }
 
 let lastVersionNotFound (filePath: string) (error: LastVersionFinder.Errors) =
@@ -36,9 +33,5 @@ let lastVersionNotFound (filePath: string) (error: LastVersionFinder.Errors) =
         ErrorCode = "EPT0002"
         HelpKeyword = "Last version not found"
         Message = "Could not find the last version in the Changelog file {0}. Error: {1}"
-        MessageArgs =
-            [|
-                box filePath
-                box (error.ToText())
-            |]
+        MessageArgs = [| box filePath; box (error.ToText()) |]
     }

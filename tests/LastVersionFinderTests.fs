@@ -11,9 +11,8 @@ open Faqt
 [<TestClass>]
 type LastVersionFinderTests() =
 
-
     [<TestMethod>]
-    member this.``should return an Error if no version is found`` () =
+    member this.``should return an Error if no version is found``() =
         let result = LastVersionFinder.tryFindLastVersion ""
 
         result
@@ -36,10 +35,10 @@ Changelog description
             .BeError()
             .WhoseValue.Should(())
             .Be(LastVersionFinder.Errors.NoVersionFound)
-            |> ignore
+        |> ignore
 
     [<TestMethod>]
-    member this.``should works for `## version - date` format`` () =
+    member this.``should works for `## version - date` format``() =
         let result = LastVersionFinder.tryFindLastVersion "## 1.0.0 - 2021-10-10"
 
         result
@@ -57,7 +56,7 @@ Changelog description
         |> ignore
 
     [<TestMethod>]
-    member this.``should works for `## version` format`` () =
+    member this.``should works for `## version` format``() =
         let result = LastVersionFinder.tryFindLastVersion "## 1.0.0"
 
         result
@@ -75,7 +74,7 @@ Changelog description
         |> ignore
 
     [<TestMethod>]
-    member this.``should works for `## version - date` format with body`` () =
+    member this.``should works for `## version - date` format with body``() =
         let result =
             LastVersionFinder.tryFindLastVersion
                 """## 1.0.0 - 2021-10-10
@@ -96,7 +95,8 @@ Body line 1
                 {
                     Version = SemVersion(1, 0, 0)
                     Date = Some(DateTime(2021, 10, 10))
-                    Body = """Body line 1
+                    Body =
+                        """Body line 1
 
 * Change 1
 
@@ -104,10 +104,10 @@ Body line 1
                 }
                 : LastVersionFinder.Version
             )
-            |> ignore
+        |> ignore
 
     [<TestMethod>]
-    member this.``should works for `## [version] - date` format`` () =
+    member this.``should works for `## [version] - date` format``() =
         let result = LastVersionFinder.tryFindLastVersion "## [1.0.0] - 2021-10-10"
 
         result
@@ -125,7 +125,7 @@ Body line 1
         |> ignore
 
     [<TestMethod>]
-    member this.``should works for `## [version]` format`` () =
+    member this.``should works for `## [version]` format``() =
         let result = LastVersionFinder.tryFindLastVersion "## [1.0.0]"
 
         result
@@ -143,7 +143,7 @@ Body line 1
         |> ignore
 
     [<TestMethod>]
-    member this.``should works for `## [version] - date` format with body`` () =
+    member this.``should works for `## [version] - date` format with body``() =
         let result =
             LastVersionFinder.tryFindLastVersion
                 """## [1.0.0] - 2021-10-10
@@ -164,15 +164,16 @@ Body line 1
                 {
                     Version = SemVersion(1, 0, 0)
                     Date = Some(DateTime(2021, 10, 10))
-                    Body = """Body line 1
+                    Body =
+                        """Body line 1
 
 * Change 1
 
     Indented change 1 description"""
-                    }
-                    : LastVersionFinder.Version
-                )
-                |> ignore
+                }
+                : LastVersionFinder.Version
+            )
+        |> ignore
 
 // I don't know how to pass an invalid version that pass the regex but not SemVer parsing
 // [<TestMethod>]

@@ -23,7 +23,8 @@ type UnitTests() =
 
     [<TestInitialize>]
     member this.Initialize() =
-        this.context <- {
+        this.context <-
+            {
                 BuildEngine = Mock<IBuildEngine>()
                 Errors = ResizeArray<BuildErrorEventArgs>()
             }
@@ -34,7 +35,7 @@ type UnitTests() =
         |> ignore
 
     [<TestMethod>]
-    member this.``task fails when changelog file does not exist`` () =
+    member this.``task fails when changelog file does not exist``() =
         let myTask = GetCurrentReleaseTask(ChangelogFile = "ThisFileDoesNotExist.md")
         myTask.BuildEngine <- this.context.BuildEngine.Object
 
@@ -45,10 +46,14 @@ type UnitTests() =
         this.context.Errors.[0].Code.Should().Be("EPT0001") |> ignore
 
     [<TestMethod>]
-    member this.``task succeeds when changelog file exists (relative path + ConventionalCommits)`` () =
+    member this.``task succeeds when changelog file exists (relative path + ConventionalCommits)``
+        ()
+        =
         // When running tests, the working directory is where the dll is located
         let myTask =
-            GetCurrentReleaseTask(ChangelogFile = "./../../../fixtures/CHANGELOG_ConventionalCommits.md")
+            GetCurrentReleaseTask(
+                ChangelogFile = "./../../../fixtures/CHANGELOG_ConventionalCommits.md"
+            )
 
         myTask.BuildEngine <- this.context.BuildEngine.Object
 
@@ -74,14 +79,18 @@ type UnitTests() =
 
 * Bug fix 1
 * Bug fix 2"""
-        )
+            )
         |> ignore
 
     [<TestMethod>]
-    member this.``task succeeds when changelog file exists (absolute path + KeepAChangeLog format)`` () =
+    member this.``task succeeds when changelog file exists (absolute path + KeepAChangeLog format)``
+        ()
+        =
         // When running tests, the working directory is where the dll is located
         let myTask =
-            GetCurrentReleaseTask(ChangelogFile = Workspace.fixtures.``CHANGELOG_KeepAChangelog.md``)
+            GetCurrentReleaseTask(
+                ChangelogFile = Workspace.fixtures.``CHANGELOG_KeepAChangelog.md``
+            )
 
         myTask.BuildEngine <- this.context.BuildEngine.Object
 
@@ -106,11 +115,11 @@ type UnitTests() =
 ### Changed
 
 - Updated the package"""
-        )
+            )
         |> ignore
 
     [<TestMethod>]
-    member this.``task fails no version is detected`` () =
+    member this.``task fails no version is detected``() =
         let myTask =
             GetCurrentReleaseTask(ChangelogFile = Workspace.fixtures.``CHANGELOG_empty.md``)
 
@@ -124,7 +133,5 @@ type UnitTests() =
 
         this.context.Errors.[0].Message
             .Should()
-            .Be(
-                "Could not find the last version in the Changelog file /Users/mmangel/Workspaces/Github/easybuild-org/EasyBuild.PackageReleaseNotes.Tasks/tests/fixtures/CHANGELOG_empty.md. Error: No version found"
-            )
+            .Contain("Could not find the last version in the Changelog file")
         |> ignore

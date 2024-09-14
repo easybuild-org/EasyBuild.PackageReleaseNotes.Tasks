@@ -38,15 +38,18 @@ type GetCurrentReleaseTask() =
         }
         |> Result.toBool
 
-    member this.StoreLastVersion (version: LastVersionFinder.Version) =
+    member this.StoreLastVersion(version: LastVersionFinder.Version) =
         this.CurrentRelease <- TaskItem()
         this.CurrentRelease.ItemSpec <- version.Version.ToString()
         this.CurrentRelease.SetMetadata("Version", version.Version.ToString())
-        this.CurrentRelease.SetMetadata("Date",
+
+        this.CurrentRelease.SetMetadata(
+            "Date",
             match version.Date with
             | Some date -> date.ToString("yyyy-MM-dd")
             | None -> ""
         )
+
         this.CurrentRelease.SetMetadata("Body", version.Body)
 
     member this.CheckFileExists(fileInfo: FileInfo) =

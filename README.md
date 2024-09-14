@@ -18,15 +18,7 @@ This project provides MSBuild tasks automate settings the following properties b
     dotnet add package EasyBuild.PackageReleaseNotes.Tasks
     ```
 
-2. Mark the dependencies as private in your project file
-
-    ```xml
-    <ItemGroup>
-        <PackageReference Include="EasyBuild.PackageReleaseNotes.Tasks" Version="<version>" PrivateAssets="All" />
-    </ItemGroup>
-    ```
-
-3. If your CHANGELOG file is not named `CHANGELOG.md`, and beside your project file, you can set the `ChangelogFile` property in your project file.
+2. If your CHANGELOG file is not named `CHANGELOG.md`, and beside your project file, you can set the `ChangelogFile` property in your project file.
 
     ```xml
     <PropertyGroup>

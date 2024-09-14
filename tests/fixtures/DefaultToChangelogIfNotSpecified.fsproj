@@ -5,10 +5,11 @@
         <TargetFramework>net6.0</TargetFramework>
     </PropertyGroup>
 
-   <ItemGroup>
-     <PackageReference Include="EasyBuild.PackageReleaseNotes.Tasks" PrivateAssets="all">
-       <Version>0.0.1-test-DefaultToChangelogIfNotSpecified</Version>
-     </PackageReference>
-   </ItemGroup>
+    <ItemGroup>
+      <PackageReference Include="EasyBuild.PackageReleaseNotes.Tasks" Version="0.0.1-test-DefaultToChangelogIfNotSpecified">
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        <PrivateAssets>all</PrivateAssets>
+      </PackageReference>
+    </ItemGroup>
 
 </Project>

@@ -10,8 +10,9 @@
    </PropertyGroup>
 
    <ItemGroup>
-     <PackageReference Include="EasyBuild.PackageReleaseNotes.Tasks" PrivateAssets="all">
-       <Version>0.0.1-test-WorksForAbsolutePathWithConventionalCommitsChangelog</Version>
+     <PackageReference Include="EasyBuild.PackageReleaseNotes.Tasks" Version="0.0.1-test-WorksForAbsolutePathWithConventionalCommitsChangelog">
+       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+       <PrivateAssets>all</PrivateAssets>
      </PackageReference>
    </ItemGroup>
 

@@ -110,7 +110,7 @@ The task exposes the following property:
 - `CurrentRelease.Body` - The body of the latest release
 
 > [!NOTE]
-> `CurrentRelease` release name is used in the sense that this is the release that is currently being processed.
+> `CurrentRelease` name is used in the sense that this is the release that is currently being processed.
 
 ## Aknowledgements
 

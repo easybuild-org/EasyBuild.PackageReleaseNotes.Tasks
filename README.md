@@ -4,7 +4,7 @@
 
 [![Sponsors badge link](https://img.shields.io/badge/Sponsors_this_project-EA4AAA?style=for-the-badge)](https://mangelmaxime.github.io/sponsors/)
 
-This project provides MSBuild tasks automate settings the following properties based on the content of a CHANGELOG file:
+This project provides MSBuild tasks to automate setting the following properties based on the content of a CHANGELOG file:
 
 - `Version` - The version of the latest release
 - `PackageVersion` - The version of the latest release

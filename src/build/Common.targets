@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <_EasyBuild_PackageReleaseNotes_Tasks Condition=" '$(MSBuildRuntimeType)' != 'Core' ">net472</_EasyBuild_PackageReleaseNotes_Tasks>
-        <_EasyBuild_PackageReleaseNotes_Tasks Condition=" '$(MSBuildRuntimeType)' == 'Core' ">net6.0</_EasyBuild_PackageReleaseNotes_Tasks>
+        <_EasyBuild_PackageReleaseNotes_Tasks Condition=" '$(MSBuildRuntimeType)' == 'Core' ">netstandard2.1</_EasyBuild_PackageReleaseNotes_Tasks>
     </PropertyGroup>
 
     <UsingTask

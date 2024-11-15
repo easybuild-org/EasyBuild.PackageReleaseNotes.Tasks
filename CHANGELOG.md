@@ -5,8 +5,15 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 <!-- EasyBuild: START -->
-<!-- last_commit_released: b7db783c842eddb874e8836828c09b431429870b -->
+<!-- last_commit_released: fd1fed1b7da8b7a80b2fb6966ea27493f5d5f3bf -->
 <!-- EasyBuild: END -->
+
+## 2.0.0
+
+### 🚀 Features
+
+- Skip `Unreleased` version to support KeepAChangelog format ([fd1fed1](https://github.com/easybuild-org/EasyBuild.CommitLinter/commit/fd1fed1b7da8b7a80b2fb6966ea27493f5d5f3bf))
+- If no version found in the changelog file, default to 0.0.0 ([d9a0f8b](https://github.com/easybuild-org/EasyBuild.CommitLinter/commit/d9a0f8be7c19485e3e50c87a8462c3152d848ae2))
 
 ## 1.2.0
 

@@ -1,4 +1,4 @@
-﻿namespace EasyBuild.PackageReleaseNotes.Tasks
+namespace EasyBuild.PackageReleaseNotes.Tasks
 
 open Microsoft.Build.Utilities
 open Microsoft.Build.Framework
@@ -29,7 +29,7 @@ type GetCurrentReleaseTask() =
         // Using result CE to make code easier to read by avoiding nested if statements
         result {
             do! this.CheckFileExists file
-            let! lastVersion = this.FintLastVersion file
+            let! lastVersion = this.FindLastVersion file
 
             this.StoreLastVersion lastVersion
 
@@ -59,7 +59,7 @@ type GetCurrentReleaseTask() =
             this.LogError(Log.changelogFileNotFound fileInfo.FullName)
             Error()
 
-    member this.FintLastVersion(fileInfo: FileInfo) : Result<LastVersionFinder.Version, unit> =
+    member this.FindLastVersion(fileInfo: FileInfo) : Result<LastVersionFinder.Version, unit> =
         let changelogContent = File.ReadAllText(fileInfo.FullName)
 
         match LastVersionFinder.tryFindLastVersion changelogContent with

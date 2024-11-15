@@ -38,7 +38,7 @@ Changelog description
         |> ignore
 
     [<TestMethod>]
-    member this.``should return an Error if not a valid version``() =
+    member this.``UNRELEASED should be skipped``() =
         let result =
             LastVersionFinder.tryFindLastVersion
                 "# Changelog
@@ -46,15 +46,26 @@ Changelog description
 Changelog description
 
 ## [Unreleased]
+
+## [1.0.0] - 2021-10-10
 "
 
         result
             .Should()
-            .BeError()
+            .BeOk()
             .WhoseValue.Should(())
-            .Be(LastVersionFinder.Errors.InvalidVersionFormat "Unreleased")
+            .Be(
+                {
+                    Version = SemVersion(1, 0, 0)
+                    Date = Some(DateTime(2021, 10, 10))
+                    Body = ""
+                }
+                : LastVersionFinder.Version
+            )
         |> ignore
 
+    [<TestMethod>]
+    member this.``should return an Error if not a valid version``() =
         let result =
             LastVersionFinder.tryFindLastVersion
                 "# Changelog

@@ -15,6 +15,13 @@ module LastVersionFinder =
             Body: string
         }
 
+        static member Zero =
+            {
+                Version = SemVersion(0, 0, 0)
+                Date = None
+                Body = ""
+            }
+
     type private VersionLineData =
         { Version: string; Date: string option }
 
@@ -22,23 +29,24 @@ module LastVersionFinder =
         let m =
             Regex.Match(
                 line,
-                "^##\\s\\[?v?(?<version>[\\w\\d.-]+\\.[\\w\\d.-]+[a-zA-Z0-9])\\]?(\\s-\\s(?<date>\\d{4}-\\d{2}-\\d{2}))?$",
+                "^##\\s+\\[?v?(?<version>[^\\]\\s]+)\\]?(\\s-\\s(?<date>\\d{4}-\\d{2}-\\d{2}))?$",
                 RegexOptions.Multiline
             )
 
         // I don't know why, but empty lines are matched
         if m.Success then
-            let date =
-                if m.Groups.["date"].Success then
-                    Some m.Groups.["date"].Value
-                else
-                    None
+            let version = m.Groups.["version"].Value
+            // Skip Unreleased versions for KeepAChangelog format
+            if version = "Unreleased" then
+                None
+            else
+                let date =
+                    if m.Groups.["date"].Success then
+                        Some m.Groups.["date"].Value
+                    else
+                        None
 
-            {
-                Version = m.Groups.["version"].Value
-                Date = date
-            }
-            |> Some
+                { Version = version; Date = date } |> Some
         else
             None
 

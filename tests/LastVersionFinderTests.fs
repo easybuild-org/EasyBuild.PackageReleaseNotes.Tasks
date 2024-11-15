@@ -38,6 +38,52 @@ Changelog description
         |> ignore
 
     [<TestMethod>]
+    member this.``should return an Error if not a valid version``() =
+        let result =
+            LastVersionFinder.tryFindLastVersion
+                "# Changelog
+
+Changelog description
+
+## [Unreleased]
+"
+
+        result
+            .Should()
+            .BeError()
+            .WhoseValue.Should(())
+            .Be(LastVersionFinder.Errors.InvalidVersionFormat "Unreleased")
+        |> ignore
+
+        let result =
+            LastVersionFinder.tryFindLastVersion
+                "# Changelog
+
+## [something] - 2022-01-13
+"
+
+        result
+            .Should()
+            .BeError()
+            .WhoseValue.Should(())
+            .Be(LastVersionFinder.Errors.InvalidVersionFormat "something")
+        |> ignore
+
+        let result =
+            LastVersionFinder.tryFindLastVersion
+                "# Changelog
+
+## this-is-not-a-valid-version
+"
+
+        result
+            .Should()
+            .BeError()
+            .WhoseValue.Should(())
+            .Be(LastVersionFinder.Errors.InvalidVersionFormat "this-is-not-a-valid-version")
+        |> ignore
+
+    [<TestMethod>]
     member this.``should works for `## version - date` format``() =
         let result = LastVersionFinder.tryFindLastVersion "## 1.0.0 - 2021-10-10"
 

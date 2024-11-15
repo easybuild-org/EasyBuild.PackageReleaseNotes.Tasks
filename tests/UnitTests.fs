@@ -121,7 +121,7 @@ type UnitTests() =
     [<TestMethod>]
     member this.``task fails no version is detected``() =
         let myTask =
-            GetCurrentReleaseTask(ChangelogFile = Workspace.fixtures.``CHANGELOG_empty.md``)
+            GetCurrentReleaseTask(ChangelogFile = Workspace.fixtures.``CHANGELOG_invalid.md``)
 
         myTask.BuildEngine <- this.context.BuildEngine.Object
 

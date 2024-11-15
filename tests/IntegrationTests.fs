@@ -177,3 +177,28 @@ type IntegrationTests() =
                 )
             |> ignore
         }
+
+    [<TestMethod>]
+    member this.``works for changelog with no version yet``() : Task =
+        task {
+
+            let projectName = "WorksForChangelogWithNoVersion.fsproj"
+
+            this.AddPackageReference projectName
+
+            let! struct (stdout, _) = Utils.getPackageProperties projectName
+
+            stdout
+                .Should()
+                .Be(
+                    """{
+  "Properties": {
+    "Version": "0.0.0",
+    "PackageVersion": "0.0.0",
+    "PackageReleaseNotes": ""
+  }
+}
+"""
+                )
+            |> ignore
+        }

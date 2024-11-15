@@ -1,4 +1,4 @@
-namespace EasyBuild.PackageReleaseNotes.Tasks
+﻿namespace EasyBuild.PackageReleaseNotes.Tasks
 
 open Microsoft.Build.Utilities
 open Microsoft.Build.Framework
@@ -65,8 +65,13 @@ type GetCurrentReleaseTask() =
         match LastVersionFinder.tryFindLastVersion changelogContent with
         | Ok version -> Ok version
         | Error error ->
-            this.LogError(Log.lastVersionNotFound fileInfo.FullName error)
-            Error()
+            match error with
+            // We found the changelog file but no version was found, so we return a zero version
+            // This can happen when there was no release yet
+            | LastVersionFinder.NoVersionFound -> Ok LastVersionFinder.Version.Zero
+            | _ ->
+                this.LogError(Log.lastVersionNotFound fileInfo.FullName error)
+                Error()
 
     /// <summary>
     /// Helper method to log an error with the given log data.

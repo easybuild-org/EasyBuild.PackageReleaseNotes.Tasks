@@ -2,7 +2,7 @@
 
 ## [Unreleased]
 
-## [this is not a valid version] - 2022-01-13
+## [not-a-version] - 2022-01-13
 
 ### Added
 

@@ -5,8 +5,14 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 <!-- EasyBuild: START -->
-<!-- last_commit_released: fd1fed1b7da8b7a80b2fb6966ea27493f5d5f3bf -->
+<!-- last_commit_released: 91fc5c57060fdd362715e838112887240fb495e3 -->
 <!-- EasyBuild: END -->
+
+## 2.1.0
+
+### 🚀 Features
+
+- Add `EasyBuildPackageReleaseNotes_DisableSetVersion` option to disable the automatic setting of the version ([91fc5c5](https://github.com/easybuild-org/EasyBuild.CommitLinter/commit/91fc5c57060fdd362715e838112887240fb495e3))
 
 ## 2.0.0
 

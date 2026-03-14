@@ -22,7 +22,8 @@
 
     <Target
         Name="SetVersionFromCurrentRelease"
-        DependsOnTargets="GetCurrentRelease">
+        DependsOnTargets="GetCurrentRelease"
+        Condition="'$(EasyBuildPackageReleaseNotes_DisableSetVersion)' != 'true'">
         <PropertyGroup Condition="'@(CurrentRelease)' != ''">
             <Version>%(CurrentRelease.Version)</Version>
             <PackageVersion>%(CurrentRelease.Version)</PackageVersion>

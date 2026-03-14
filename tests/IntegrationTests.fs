@@ -202,3 +202,32 @@ type IntegrationTests() =
                 )
             |> ignore
         }
+
+    [<TestMethod>]
+    member this.``does not set PackageVersion when EasyBuildPackageReleaseNotes_DisableSetVersion is true``
+        ()
+        : Task
+        =
+        task {
+            let projectName = "DoesNotSetPackageVersionWhenOptedOut.fsproj"
+
+            this.AddPackageReference projectName
+
+            let! struct (stdout, _) = Utils.getPackageProperties projectName
+
+            // Version and PackageVersion should remain at their SDK defaults (empty string)
+            // and PackageReleaseNotes should not be set either
+            stdout
+                .Should()
+                .Be(
+                    """{
+  "Properties": {
+    "Version": "1.0.0",
+    "PackageVersion": "1.0.0",
+    "PackageReleaseNotes": ""
+  }
+}
+"""
+                )
+            |> ignore
+        }

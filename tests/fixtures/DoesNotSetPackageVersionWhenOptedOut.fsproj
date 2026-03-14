@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <EasyBuildPackageReleaseNotes_DisableSetVersion>true</EasyBuildPackageReleaseNotes_DisableSetVersion>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="EasyBuild.PackageReleaseNotes.Tasks" Version="0.0.1-test-DoesNotSetPackageVersionWhenOptedOut">
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        <PrivateAssets>all</PrivateAssets>
+      </PackageReference>
+    </ItemGroup>
+
+</Project>

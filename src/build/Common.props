@@ -1,5 +1,6 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
         <ChangelogFile Condition="'$(ChangelogFile)' == ''">CHANGELOG.md</ChangelogFile>
+        <EasyBuildPackageReleaseNotes_DisableSetVersion Condition="'$(EasyBuildPackageReleaseNotes_DisableSetVersion)' == ''">false</EasyBuildPackageReleaseNotes_DisableSetVersion>
     </PropertyGroup>
 </Project>

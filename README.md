@@ -93,6 +93,24 @@ $                    # End of the string
 
 </details>
 
+## Disable automatic version setting
+
+By default, the task automatically sets `Version`, `PackageVersion`, and `PackageReleaseNotes` from the changelog. If you need to override the version (e.g. to generate a local package with a custom version), you can disable this behaviour by setting `EasyBuildPackageReleaseNotes_DisableSetVersion` to `true`.
+
+In your project file:
+
+```xml
+<PropertyGroup>
+    <EasyBuildPackageReleaseNotes_DisableSetVersion>true</EasyBuildPackageReleaseNotes_DisableSetVersion>
+</PropertyGroup>
+```
+
+Or on the CLI:
+
+```bash
+dotnet pack -p:EasyBuildPackageReleaseNotes_DisableSetVersion=true -p:PackageVersion=1.0.0-local
+```
+
 ## MSBuild properties
 
 The task exposes the following property:
